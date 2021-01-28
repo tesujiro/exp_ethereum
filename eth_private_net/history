@@ -1,0 +1,5 @@
+eth.getBlock(0)
+eth.Block(0)
+eth.block(0)
+eth.getBlock(0)
+quit

@@ -1,0 +1,110 @@
+INFO [01-28|19:51:45.232] Maximum peer count                       ETH=50 LES=0 total=50
+INFO [01-28|19:51:45.255] Set global gas cap                       cap=25000000
+INFO [01-28|19:51:45.255] Allocated trie memory caches             clean=256.00MiB dirty=256.00MiB
+INFO [01-28|19:51:45.255] Allocated cache and file handles         database=/Users/tesujiro/exp_ethereum/eth_private_net/geth/chaindata cache=512.00MiB handles=5120
+INFO [01-28|19:51:45.358] Opened ancient database                  database=/Users/tesujiro/exp_ethereum/eth_private_net/geth/chaindata/ancient
+INFO [01-28|19:51:45.360] Initialised chain configuration          config="{ChainID: 15 Homestead: <nil> DAO: <nil> DAOSupport: false EIP150: <nil> EIP155: <nil> EIP158: <nil> Byzantium: <nil> Constantinople: <nil> Petersburg: <nil> Istanbul: <nil>, Muir Glacier: <nil>, YOLO v2: <nil>, Engine: unknown}"
+INFO [01-28|19:51:45.360] Disk storage enabled for ethash caches   dir=/Users/tesujiro/exp_ethereum/eth_private_net/geth/ethash count=3
+INFO [01-28|19:51:45.360] Disk storage enabled for ethash DAGs     dir=/Users/tesujiro/Library/Ethash count=2
+INFO [01-28|19:51:45.360] Initialising Ethereum protocol           versions="[65 64 63]" network=15 dbversion=<nil>
+WARN [01-28|19:51:45.360] Upgrade blockchain database version      from=<nil> to=8
+INFO [01-28|19:51:45.362] Loaded most recent local header          number=0 hash="7b2e8b…7e0432" td=16384 age=51y9mo3w
+INFO [01-28|19:51:45.362] Loaded most recent local full block      number=0 hash="7b2e8b…7e0432" td=16384 age=51y9mo3w
+INFO [01-28|19:51:45.362] Loaded most recent local fast block      number=0 hash="7b2e8b…7e0432" td=16384 age=51y9mo3w
+INFO [01-28|19:51:45.363] Regenerated local transaction journal    transactions=0 accounts=0
+INFO [01-28|19:51:45.373] Allocated fast sync bloom                size=512.00MiB
+INFO [01-28|19:51:45.374] Initialized fast sync bloom              items=0 errorrate=0.000 elapsed="48.47µs"
+INFO [01-28|19:51:45.374] Starting peer-to-peer node               instance=Geth/v1.9.25-stable/darwin-amd64/go1.15.5
+INFO [01-28|19:51:45.406] IPC endpoint opened                      url=/Users/tesujiro/exp_ethereum/eth_private_net/geth.ipc
+INFO [01-28|19:51:45.407] New local node record                    seq=1 id=3fc048672d789174 ip=127.0.0.1 udp=0 tcp=30303
+INFO [01-28|19:51:45.408] Started P2P networking                   self="enode://d4dda765a856b37b513723ff19998684b52dde54bbac1d326f27da9dd5b64852febde3fb9ddb36b5bd243fd5f11426ac536cbf07cb67150e4640dfd64fd7c66c@127.0.0.1:30303?discport=0"
+WARN [01-28|19:51:45.518] Served eth_coinbase                      reqid=3 t="33.125µs" err="etherbase must be explicitly specified"
+INFO [01-28|19:51:48.189] Mapped network port                      proto=tcp extport=30303 intport=30303 interface="UPNP IGDv1-IP1"
+INFO [01-28|19:57:44.271] IPC endpoint closed                      url=/Users/tesujiro/exp_ethereum/eth_private_net/geth.ipc
+INFO [01-28|19:57:44.307] Deallocated fast sync bloom              items=0 errorrate=0.000
+INFO [01-28|19:57:44.307] Ethereum protocol stopped 
+INFO [01-28|19:57:44.307] Transaction pool stopped 
+INFO [01-28|19:57:44.307] Writing clean trie cache to disk         path=/Users/tesujiro/exp_ethereum/eth_private_net/geth/triecache threads=4
+INFO [01-28|19:57:44.310] Persisted the clean trie cache           path=/Users/tesujiro/exp_ethereum/eth_private_net/geth/triecache elapsed=2.836ms
+INFO [01-28|19:57:44.311] Blockchain stopped 
+INFO [01-28|19:58:24.504] Maximum peer count                       ETH=50 LES=0 total=50
+INFO [01-28|19:58:24.526] Set global gas cap                       cap=25000000
+INFO [01-28|19:58:24.526] Allocated trie memory caches             clean=256.00MiB dirty=256.00MiB
+INFO [01-28|19:58:24.526] Allocated cache and file handles         database=/Users/tesujiro/exp_ethereum/eth_private_net/geth/chaindata cache=512.00MiB handles=5120
+INFO [01-28|19:58:24.586] Opened ancient database                  database=/Users/tesujiro/exp_ethereum/eth_private_net/geth/chaindata/ancient
+INFO [01-28|19:58:24.587] Initialised chain configuration          config="{ChainID: 15 Homestead: <nil> DAO: <nil> DAOSupport: false EIP150: <nil> EIP155: <nil> EIP158: <nil> Byzantium: <nil> Constantinople: <nil> Petersburg: <nil> Istanbul: <nil>, Muir Glacier: <nil>, YOLO v2: <nil>, Engine: unknown}"
+INFO [01-28|19:58:24.587] Disk storage enabled for ethash caches   dir=/Users/tesujiro/exp_ethereum/eth_private_net/geth/ethash count=3
+INFO [01-28|19:58:24.587] Disk storage enabled for ethash DAGs     dir=/Users/tesujiro/Library/Ethash count=2
+INFO [01-28|19:58:24.587] Initialising Ethereum protocol           versions="[65 64 63]" network=15 dbversion=8
+INFO [01-28|19:58:24.589] Loaded most recent local header          number=0 hash="7b2e8b…7e0432" td=16384 age=51y9mo3w
+INFO [01-28|19:58:24.589] Loaded most recent local full block      number=0 hash="7b2e8b…7e0432" td=16384 age=51y9mo3w
+INFO [01-28|19:58:24.589] Loaded most recent local fast block      number=0 hash="7b2e8b…7e0432" td=16384 age=51y9mo3w
+INFO [01-28|19:58:24.589] Loaded local transaction journal         transactions=0 dropped=0
+INFO [01-28|19:58:24.589] Regenerated local transaction journal    transactions=0 accounts=0
+INFO [01-28|19:58:24.598] Allocated fast sync bloom                size=512.00MiB
+INFO [01-28|19:58:24.599] Starting peer-to-peer node               instance=Geth/v1.9.25-stable/darwin-amd64/go1.15.5
+INFO [01-28|19:58:24.599] Initialized fast sync bloom              items=0 errorrate=0.000 elapsed="99.591µs"
+INFO [01-28|19:58:24.649] New local node record                    seq=2 id=3fc048672d789174 ip=127.0.0.1 udp=0 tcp=30303
+INFO [01-28|19:58:24.649] Started P2P networking                   self="enode://d4dda765a856b37b513723ff19998684b52dde54bbac1d326f27da9dd5b64852febde3fb9ddb36b5bd243fd5f11426ac536cbf07cb67150e4640dfd64fd7c66c@127.0.0.1:30303?discport=0"
+INFO [01-28|19:58:24.651] IPC endpoint opened                      url=/Users/tesujiro/exp_ethereum/eth_private_net/geth.ipc
+INFO [01-28|19:58:27.429] Mapped network port                      proto=tcp extport=30303 intport=30303 interface="UPNP IGDv1-IP1"
+INFO [01-28|19:58:29.175] Got interrupt, shutting down... 
+INFO [01-28|19:58:29.175] IPC endpoint closed                      url=/Users/tesujiro/exp_ethereum/eth_private_net/geth.ipc
+INFO [01-28|19:58:29.207] Deallocated fast sync bloom              items=0 errorrate=0.000
+INFO [01-28|19:58:29.207] Ethereum protocol stopped 
+INFO [01-28|19:58:29.207] Transaction pool stopped 
+INFO [01-28|19:58:29.208] Writing clean trie cache to disk         path=/Users/tesujiro/exp_ethereum/eth_private_net/geth/triecache threads=4
+INFO [01-28|19:58:29.213] Persisted the clean trie cache           path=/Users/tesujiro/exp_ethereum/eth_private_net/geth/triecache elapsed=4.868ms
+INFO [01-28|19:58:29.213] Blockchain stopped 
+INFO [01-28|20:01:33.307] Maximum peer count                       ETH=50 LES=0 total=50
+INFO [01-28|20:01:33.328] Set global gas cap                       cap=25000000
+INFO [01-28|20:01:33.328] Allocated trie memory caches             clean=256.00MiB dirty=256.00MiB
+INFO [01-28|20:01:33.328] Allocated cache and file handles         database=/Users/tesujiro/exp_ethereum/eth_private_net/geth/chaindata cache=512.00MiB handles=5120
+INFO [01-28|20:01:33.382] Opened ancient database                  database=/Users/tesujiro/exp_ethereum/eth_private_net/geth/chaindata/ancient
+INFO [01-28|20:01:33.383] Initialised chain configuration          config="{ChainID: 15 Homestead: <nil> DAO: <nil> DAOSupport: false EIP150: <nil> EIP155: <nil> EIP158: <nil> Byzantium: <nil> Constantinople: <nil> Petersburg: <nil> Istanbul: <nil>, Muir Glacier: <nil>, YOLO v2: <nil>, Engine: unknown}"
+INFO [01-28|20:01:33.383] Disk storage enabled for ethash caches   dir=/Users/tesujiro/exp_ethereum/eth_private_net/geth/ethash count=3
+INFO [01-28|20:01:33.383] Disk storage enabled for ethash DAGs     dir=/Users/tesujiro/Library/Ethash count=2
+INFO [01-28|20:01:33.383] Initialising Ethereum protocol           versions="[65 64 63]" network=15 dbversion=8
+INFO [01-28|20:01:33.385] Loaded most recent local header          number=0 hash="7b2e8b…7e0432" td=16384 age=51y9mo3w
+INFO [01-28|20:01:33.385] Loaded most recent local full block      number=0 hash="7b2e8b…7e0432" td=16384 age=51y9mo3w
+INFO [01-28|20:01:33.385] Loaded most recent local fast block      number=0 hash="7b2e8b…7e0432" td=16384 age=51y9mo3w
+INFO [01-28|20:01:33.386] Loaded local transaction journal         transactions=0 dropped=0
+INFO [01-28|20:01:33.386] Regenerated local transaction journal    transactions=0 accounts=0
+INFO [01-28|20:01:33.395] Allocated fast sync bloom                size=512.00MiB
+INFO [01-28|20:01:33.396] Starting peer-to-peer node               instance=Geth/v1.9.25-stable/darwin-amd64/go1.15.5
+INFO [01-28|20:01:33.396] Initialized fast sync bloom              items=0 errorrate=0.000 elapsed="91.62µs"
+INFO [01-28|20:01:33.447] New local node record                    seq=3 id=3fc048672d789174 ip=127.0.0.1 udp=0 tcp=30303
+INFO [01-28|20:01:33.448] Started P2P networking                   self="enode://d4dda765a856b37b513723ff19998684b52dde54bbac1d326f27da9dd5b64852febde3fb9ddb36b5bd243fd5f11426ac536cbf07cb67150e4640dfd64fd7c66c@127.0.0.1:30303?discport=0"
+INFO [01-28|20:01:33.449] IPC endpoint opened                      url=/Users/tesujiro/exp_ethereum/eth_private_net/geth.ipc
+INFO [01-28|20:01:36.219] Mapped network port                      proto=tcp extport=30303 intport=30303 interface="UPNP IGDv1-IP1"
+WARN [01-28|20:01:56.745] Served eth_coinbase                      reqid=3 t="25.932µs" err="etherbase must be explicitly specified"
+INFO [01-28|20:05:06.160] Got interrupt, shutting down... 
+INFO [01-28|20:05:06.160] IPC endpoint closed                      url=/Users/tesujiro/exp_ethereum/eth_private_net/geth.ipc
+INFO [01-28|20:05:06.208] Deallocated fast sync bloom              items=0 errorrate=0.000
+INFO [01-28|20:05:06.209] Ethereum protocol stopped 
+INFO [01-28|20:05:06.209] Transaction pool stopped 
+INFO [01-28|20:05:06.209] Writing clean trie cache to disk         path=/Users/tesujiro/exp_ethereum/eth_private_net/geth/triecache threads=4
+INFO [01-28|20:05:06.214] Persisted the clean trie cache           path=/Users/tesujiro/exp_ethereum/eth_private_net/geth/triecache elapsed=4.781ms
+INFO [01-28|20:05:06.214] Blockchain stopped 
+INFO [01-28|20:08:16.633] Maximum peer count                       ETH=50 LES=0 total=50
+INFO [01-28|20:08:16.659] Set global gas cap                       cap=25000000
+INFO [01-28|20:08:16.659] Allocated trie memory caches             clean=256.00MiB dirty=256.00MiB
+INFO [01-28|20:08:16.659] Allocated cache and file handles         database=/Users/tesujiro/go/src/github.com/tesujiro/exp_ethereum/eth_private_net/geth/chaindata cache=512.00MiB handles=5120
+INFO [01-28|20:08:16.697] Opened ancient database                  database=/Users/tesujiro/go/src/github.com/tesujiro/exp_ethereum/eth_private_net/geth/chaindata/ancient
+INFO [01-28|20:08:16.698] Initialised chain configuration          config="{ChainID: 15 Homestead: <nil> DAO: <nil> DAOSupport: false EIP150: <nil> EIP155: <nil> EIP158: <nil> Byzantium: <nil> Constantinople: <nil> Petersburg: <nil> Istanbul: <nil>, Muir Glacier: <nil>, YOLO v2: <nil>, Engine: unknown}"
+INFO [01-28|20:08:16.698] Disk storage enabled for ethash caches   dir=/Users/tesujiro/go/src/github.com/tesujiro/exp_ethereum/eth_private_net/geth/ethash count=3
+INFO [01-28|20:08:16.698] Disk storage enabled for ethash DAGs     dir=/Users/tesujiro/Library/Ethash count=2
+INFO [01-28|20:08:16.698] Initialising Ethereum protocol           versions="[65 64 63]" network=15 dbversion=8
+INFO [01-28|20:08:16.700] Loaded most recent local header          number=0 hash="7b2e8b…7e0432" td=16384 age=51y9mo3w
+INFO [01-28|20:08:16.700] Loaded most recent local full block      number=0 hash="7b2e8b…7e0432" td=16384 age=51y9mo3w
+INFO [01-28|20:08:16.700] Loaded most recent local fast block      number=0 hash="7b2e8b…7e0432" td=16384 age=51y9mo3w
+INFO [01-28|20:08:16.700] Loaded local transaction journal         transactions=0 dropped=0
+INFO [01-28|20:08:16.701] Regenerated local transaction journal    transactions=0 accounts=0
+INFO [01-28|20:08:16.714] Allocated fast sync bloom                size=512.00MiB
+INFO [01-28|20:08:16.714] Initialized fast sync bloom              items=0 errorrate=0.000 elapsed="47.676µs"
+INFO [01-28|20:08:16.715] Starting peer-to-peer node               instance=Geth/v1.9.25-stable/darwin-amd64/go1.15.5
+INFO [01-28|20:08:16.759] New local node record                    seq=4 id=3fc048672d789174 ip=127.0.0.1 udp=0 tcp=30303
+INFO [01-28|20:08:16.760] Started P2P networking                   self="enode://d4dda765a856b37b513723ff19998684b52dde54bbac1d326f27da9dd5b64852febde3fb9ddb36b5bd243fd5f11426ac536cbf07cb67150e4640dfd64fd7c66c@127.0.0.1:30303?discport=0"
+INFO [01-28|20:08:16.760] IPC endpoint opened                      url=/Users/tesujiro/go/src/github.com/tesujiro/exp_ethereum/eth_private_net/geth.ipc
+INFO [01-28|20:08:19.531] Mapped network port                      proto=tcp extport=30303 intport=30303 interface="UPNP IGDv1-IP1"
+WARN [01-28|20:08:23.537] Served eth_coinbase                      reqid=3 t="33.277µs" err="etherbase must be explicitly specified"
