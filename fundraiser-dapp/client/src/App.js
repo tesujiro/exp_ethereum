@@ -49,7 +49,6 @@ const App = () => {
 
     const classes = useStyles();
 
-
     const runExample = async () => {
 	const { accounts, contract } = state;
 
