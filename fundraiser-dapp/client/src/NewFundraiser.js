@@ -34,7 +34,7 @@ const NewFundraiser = () => {
     const [ description, setFundraiserDescription ] = useState(null)
     const [ imageURL, setImageURL ] = useState(null)
     const [ beneficiary, setBeneficiary ] = useState(null)
-    const [ custodian, setCustodian ] = useState(null)
+    //const [ custodian, setCustodian ] = useState(null)
     const [ contract, setContract] = useState(null)
     const [ accounts, setAccounts ] = useState(null)
 
@@ -43,8 +43,10 @@ const NewFundraiser = () => {
 	    try {
 		const web3 = await getWeb3();
 		const networkId = await web3.eth.net.getId();
+		console.log("networkId: "+networkId);
 		const deployedNetwork = FactoryContract.networks[networkId];
 		const accounts = await web3.eth.getAccounts();
+		console.log("accounts: "+accounts);
 		const instance = new web3.eth.Contract(
 		    FactoryContract.abi,
 		    deployedNetwork && deployedNetwork.address,
@@ -73,7 +75,7 @@ const NewFundraiser = () => {
 	    imageURL,
 	    description,
 	    beneficiary,
-	    custodian
+	    //custodian
 	).send({ from: accounts[0] })
 
 	alert('Successfully created fundraiser')
@@ -138,6 +140,7 @@ const NewFundraiser = () => {
 	  inputProps={{ 'aria-label': 'bare' }}
 	/>
 
+	{/*
 	<label>Custodian</label>
 	<TextField
 	  id="outlined-bare"
@@ -148,6 +151,7 @@ const NewFundraiser = () => {
 	  variant="outlined"
 	  inputProps={{ 'aria-label': 'bare' }}
 	/>
+	*/}
 
 	<Button
 	  onClick={handleSubmit}
