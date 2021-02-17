@@ -32,8 +32,7 @@ const App = () => {
 		setState({web3, accounts, contract: instance});
 	    } catch(error) {
 		alert(
-		    `Failed to load web3, accounts, or contract.
-	  Check console for details.`,
+		    `Failed to load web3, accounts, or contract. Check console for details.`,
 		)
 		console.error(error);
 	    }
