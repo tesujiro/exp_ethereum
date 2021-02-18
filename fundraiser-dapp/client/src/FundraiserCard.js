@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -24,7 +24,8 @@ const useStyles = makeStyles({
 const FundraiserCard = (props) => {
     const classes = useStyles();
     //const web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'))
-    const web3 = await getWeb3();
+    //const web3 = await getWeb3();
+    const web3 = getWeb3();
 
     const [ contract, setContract] = useState(null)
     const [ accounts, setAccounts ] = useState(null)
@@ -41,6 +42,8 @@ const FundraiserCard = (props) => {
 
     return (
 	<div className="fundraiser-card-content">
+	This is FundraiserCard = 
+	{props.fundraiser}
 	    <Card className={classes.card}>
 		<CardActionArea>
 		    <CardMedia

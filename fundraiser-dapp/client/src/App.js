@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
 
 import NewFundraiser from './NewFundraiser';
 import Home from './Home';
+import FundraiserCard from './FundraiserCard'
 
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -55,6 +56,7 @@ const App = () => {
 
     return(
 	<Router>
+	this is App.js
 	  <div>
 	    <AppBar position="static" color="default">
 	      <Toolbar>

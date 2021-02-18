@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import getWeb3 from "./getWeb3";
 import FactoryContract from "./contracts/FundraiserFactory.json";
+import FundraiserCard from './FundraiserCard'
 
 const Home = () => {
     const [ contract, setContract] = useState(null)
@@ -10,6 +11,17 @@ const Home = () => {
     useEffect(() => {
 	init();
     }, []);
+
+    const displayFundraisers = () => {
+	if (funds) {  // TODO ???
+	    console.log("funds: "+funds);
+	    return funds.map((fundraiser) => {
+		return (
+		    <FundraiserCard fundraiser={fundraiser} />
+		)
+	    })
+	}
+    }
 
     const init = async () => {
 	try {
@@ -25,6 +37,7 @@ const Home = () => {
 	    setAccounts(accounts)
 
 	    const funds = await instance.methods.fundraisers(10, 0).call()
+	    console.log("funds: "+funds)
 	    setFunds(funds)
 	}
 	catch(error) {
@@ -37,6 +50,7 @@ const Home = () => {
 
     return (
 	<div className="main-container">
+	This is Home.js
 	{displayFundraisers()}
 	</div>
     )
