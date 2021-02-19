@@ -47,6 +47,9 @@ const NewFundraiser = () => {
 		const deployedNetwork = FactoryContract.networks[networkId];
 		const accounts = await web3.eth.getAccounts();
 		console.log("accounts: "+accounts);
+		console.log("FactoryContract: "+FactoryContract);
+		console.log("FactoryContract.abi: "+(FactoryContract.abi));
+		console.log("deployNetwork && address: "+(deployedNetwork && deployedNetwork.address));
 		const instance = new web3.eth.Contract(
 		    FactoryContract.abi,
 		    deployedNetwork && deployedNetwork.address,
@@ -54,6 +57,7 @@ const NewFundraiser = () => {
 
 		//setWeb3(web3)
 		setContract(instance)
+		console.log("contract: "+contract);
 		setAccounts(accounts)
 
 	    } catch(error) {
@@ -69,6 +73,8 @@ const NewFundraiser = () => {
     const classes = useStyles();
 
     const handleSubmit = async () => {
+	console.log("name: "+name);
+	console.log("contact: "+contract);
 	await contract.methods.createFundraiser(
 	    name,
 	    website,
