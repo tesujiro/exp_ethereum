@@ -56,6 +56,9 @@ const NewFundraiser = () => {
 		);
 
 		//setWeb3(web3)
+		console.log("instance.methods: "+instance.methods);
+		//instance.methods.map(method => console.log(method));
+		//console.log("typeof instance: "+(typeof instance));
 		setContract(instance)
 		console.log("contract: "+contract);
 		setAccounts(accounts)
