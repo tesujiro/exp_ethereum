@@ -14,8 +14,13 @@ const Home = () => {
 
     const displayFundraisers = () => {
 	if (funds) {  // TODO ???
+	    console.log("funds.length: "+funds.length);
 	    console.log("funds: "+funds);
 	    return funds.map((fundraiser) => {
+	    	console.log("fundraiser: "+fundraiser);
+	    	//console.log("fundraiser: "+JSON.stringify(fundraiser));
+	    	//console.log("fundraiser.name: "+fundraiser.name);
+	    	//console.log("fundraiser.imageURL: "+fundraiser.imageURL);
 		return (
 		    <FundraiserCard fundraiser={fundraiser} />
 		)

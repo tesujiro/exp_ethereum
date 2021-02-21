@@ -76,8 +76,10 @@ const NewFundraiser = () => {
     const classes = useStyles();
 
     const handleSubmit = async () => {
-	console.log("name: "+name);
-	console.log("contact: "+contract);
+	//console.log("name: "+name);
+	//console.log("contract: "+contract);
+	//console.log("contract.methods: "+contract.methods);
+	//console.log("beneficiary: "+beneficiary);
 	await contract.methods.createFundraiser(
 	    name,
 	    website,
