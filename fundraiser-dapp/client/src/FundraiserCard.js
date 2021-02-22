@@ -49,24 +49,29 @@ const FundraiserCard = (props) => {
 	try {
 	    console.log("fundraiser:",fundraiser);
 	    //const fund = fundraiser
-	    //console.log("web3:",web3);
 	    const networkId = await web3.eth.net.getId();
-	    //console.log("networkId:",networkId);
 	    const deployedNetwork = FundraiserContract.networks[networkId];
 	    const accounts = await web3.eth.getAccounts();
-	    //console.log("accounts:",accounts);
 	    const instance = await new web3.eth.Contract(
 		FundraiserContract.abi,
 		fundraiser
 	    );
-	    console.log("instance:",instance);
-	    console.log("before contract:",contract);
-	    //setContract(instance)
-	    setContract(instance,() => {console.log("finished contract:")});
-	    console.log("after  contract:",contract);
+
+	    setContract(instance)
 	    setAccounts(accounts)
 
-	    // Placeholder for getting information about each contract
+	    const name = await instance.methods.name().call()
+	    const description = await instance.methods.description().call()
+	    const totalDonations = await instance.methods.totalDonations().call()
+	    const imageURL = await instance.methods.imageURL().call()
+	    const url = await instance.methods.url().call()
+
+	    setFundname(name)
+	    setDescription(description)
+	    setImageURL(imageURL)
+	    console.log("imageURL:",imageURL);
+	    setTotalDonations(totalDonations)
+	    setURL(url)
 	}
 	catch(error) {
 	    console.error(error);
@@ -77,13 +82,13 @@ const FundraiserCard = (props) => {
     }
 
     return (
-	<div className="fundraiser-card-content" key={props.fundraiser.name}>
+	<div className="fundraiser-card-content" >
 	This is FundraiserCard = {props.fundraiser} <br/>
 	    <Card className={classes.card}>
 		<CardActionArea>
 		    <CardMedia
 		    className={classes.media}
-		    image={props.fundraiser.imageURL}
+		    image={imageURL}
 		    title="Fundraiser Image"
 		    />
 		    <CardContent>
