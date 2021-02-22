@@ -1,17 +1,24 @@
 import React, { useState, useEffect } from 'react';
+
 import { makeStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+
 import FundraiserContract from "./contracts/Fundraiser.json";
 import Web3 from 'web3'
 //import getWeb3 from "./getWeb3";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
     card: {
 	maxWidth: 450,
 	height: 400
@@ -19,7 +26,13 @@ const useStyles = makeStyles({
     media: {
 	height: 140,
     },
-});
+    button: {
+	margin: theme.spacing(1),
+    },
+    input: {
+	display: 'none',
+    },
+}));
 
 const FundraiserCard = (props) => {
     const classes = useStyles();
@@ -34,6 +47,17 @@ const FundraiserCard = (props) => {
     const [ donationCount, setDonationCount ] = useState(null)
     const [ imageURL, setImageURL ] = useState(null)
     const [ url, setURL ] = useState(null)
+    const [open, setOpen] = React.useState(false);
+
+    const handleOpen = () => {
+	setOpen(true);
+	// this will set our state to true and open the modal
+    };
+
+    const handleClose = () => {
+	setOpen(false);
+	// this will close the modal on click away and on button close
+    };
 
     useEffect(() => {
 	// we'll add in the Web3 call here
@@ -84,7 +108,22 @@ const FundraiserCard = (props) => {
     return (
 	<div className="fundraiser-card-content" >
 	This is FundraiserCard = {props.fundraiser} <br/>
-	    <Card className={classes.card}>
+	    <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+		<DialogTitle id="form-dialog-title">Donate to {fundName}</DialogTitle>
+		<DialogContent>
+		    <DialogContentText>
+			<img src={imageURL} width='200px' height='200px' />
+			<p>{description}</p>
+		    </DialogContentText>
+		</DialogContent>
+		<DialogActions>
+		    <Button onClick={handleClose} color="primary">
+			Cancel
+		    </Button>
+		</DialogActions>
+	    </Dialog>
+
+	    <Card className={classes.card} onClick={handleOpen}>
 		<CardActionArea>
 		    <CardMedia
 		    className={classes.media}
@@ -101,7 +140,7 @@ const FundraiserCard = (props) => {
 		    </CardContent>
 		</CardActionArea>
 		<CardActions>
-		    <Button size="small" color="primary">
+		    <Button onClick={handleOpen} variant="contained" className={classes.button}>
 			View More
 		    </Button>
 		</CardActions>
