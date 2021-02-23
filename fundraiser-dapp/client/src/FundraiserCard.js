@@ -24,6 +24,11 @@ import FundraiserContract from "./contracts/Fundraiser.json";
 import Web3 from 'web3'
 //import getWeb3 from "./getWeb3";
 
+const cc = require('cryptocompare');
+const apiKey = process.env.REACT_APP_CRYPTOCOMPARE_API_KEY;
+console.log("API-KEY=",apiKey);
+cc.setApiKey(apiKey);
+
 const useStyles = makeStyles(theme => ({
     container: {
 	display: 'flex',
@@ -70,7 +75,9 @@ const FundraiserCard = (props) => {
     const [ imageURL, setImageURL ] = useState(null)
     const [ url, setURL ] = useState(null)
     const [ open, setOpen ] = React.useState(false);
-    const [ donationAmount, setDonationAmount ] = useState(null)
+    const [ donationAmount, setDonationAmount ] = useState(null);
+    const [ exchangeRate, setExchangeRate ] = useState(null);
+    const ethAmount = donationAmount / exchangeRate || 0;
 
     const handleOpen = () => {
 	setDonationAmount(0);
@@ -86,7 +93,9 @@ const FundraiserCard = (props) => {
     const submitFunds = async () => {
 	console.log("submitFunds() : donationAmount $",donationAmount);
 	const fundraisercontract = contract
-	const donation = web3.utils.toWei(donationAmount)
+	const ethRate = exchangeRate
+	const ethTotal = donationAmount / ethRate
+	const donation = web3.utils.toWei(ethTotal.toString())
 
 	await contract.methods.donate().send({
 	    from: accounts[0],
@@ -97,6 +106,13 @@ const FundraiserCard = (props) => {
 
 	const totalDonations = await contract.methods.totalDonations().call()
 	setTotalDonations(totalDonations)
+	/*
+	const exchangeRate = await cc.price('ETH', ['USD']);
+	setExchangeRate(exchangeRate.USD);
+	const eth = web3.utils.fromWei(totalDonations, 'ether')
+	const dollarDonationAmount = exchangeRate.USD * eth
+	setTotalDonations(dollarDonationAmount)
+	*/
     }
 
     useEffect(() => {
@@ -111,6 +127,11 @@ const FundraiserCard = (props) => {
 	console.log("FundraiserCard.init()");
 	//const web3 = await getWeb3();
 	try {
+	    // Here ??
+	    //const apiKey = process.env.REACT_APP_CRYPTOCOMPARE_API_KEY;
+	    //console.log("API-KEY=",apiKey);
+	    cc.setApiKey(apiKey);
+
 	    console.log("fundraiser:",fundraiser);
 	    //const fund = fundraiser
 	    const networkId = await web3.eth.net.getId();
@@ -130,12 +151,23 @@ const FundraiserCard = (props) => {
 	    const imageURL = await instance.methods.imageURL().call()
 	    const url = await instance.methods.url().call()
 
+	    // calculate the exchange rate here
+	    const exchangeRate = await cc.price('ETH', ['USD']);
+	    setExchangeRate(exchangeRate.USD);
+	    // pass in the coin you want to check and the currency
+	    const eth = web3.utils.fromWei(totalDonations, 'ether')
+	    const dollarDonationAmount = exchangeRate.USD * eth
+	    console.log("dollarDonationAmount:",dollarDonationAmount);
+
 	    setFundname(name)
 	    setDescription(description)
 	    setImageURL(imageURL)
 	    console.log("imageURL:",imageURL);
-	    setTotalDonations(totalDonations)
+	    //setTotalDonations(totalDonations)
 	    setURL(url)
+
+	    setTotalDonations(dollarDonationAmount)
+
 	}
 	catch(error) {
 	    console.error(error);
@@ -166,6 +198,7 @@ const FundraiserCard = (props) => {
 			placeholder="0.00"
 		    />
 		</FormControl>
+		<p>Eth Amount: {ethAmount}</p>
 		<DialogActions>
 		    <Button onClick={submitFunds} variant="contained" color="primary">
 			Donate
@@ -189,7 +222,7 @@ const FundraiserCard = (props) => {
 			</Typography>
 			<Typography variant="body2" color="textSecondary" component="p">
 			    {description} <br/>
-			    Total Donations: {totalDonations}
+			    Total Donations: ${totalDonations}
 			</Typography>
 		    </CardContent>
 		</CardActionArea>
