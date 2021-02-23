@@ -69,9 +69,11 @@ const FundraiserCard = (props) => {
     const [ donationCount, setDonationCount ] = useState(null)
     const [ imageURL, setImageURL ] = useState(null)
     const [ url, setURL ] = useState(null)
-    const [open, setOpen] = React.useState(false);
+    const [ open, setOpen ] = React.useState(false);
+    const [ donationAmount, setDonationAmount ] = useState(null)
 
     const handleOpen = () => {
+	setDonationAmount(0);
 	setOpen(true);
 	// this will set our state to true and open the modal
     };
@@ -80,6 +82,22 @@ const FundraiserCard = (props) => {
 	setOpen(false);
 	// this will close the modal on click away and on button close
     };
+
+    const submitFunds = async () => {
+	console.log("submitFunds() : donationAmount $",donationAmount);
+	const fundraisercontract = contract
+	const donation = web3.utils.toWei(donationAmount)
+
+	await contract.methods.donate().send({
+	    from: accounts[0],
+	    value: donation,
+	    gas: 650000
+	})
+	setOpen(false);
+
+	const totalDonations = await contract.methods.totalDonations().call()
+	setTotalDonations(totalDonations)
+    }
 
     useEffect(() => {
 	// we'll add in the Web3 call here
@@ -127,9 +145,10 @@ const FundraiserCard = (props) => {
 	}
     }
 
+	//This is FundraiserCard = {props.fundraiser} <br/>
+
     return (
 	<div className="fundraiser-card-content" >
-	This is FundraiserCard = {props.fundraiser} <br/>
 	    <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
 		<DialogTitle id="form-dialog-title">Donate to {fundName}</DialogTitle>
 		<DialogContent>
@@ -138,7 +157,19 @@ const FundraiserCard = (props) => {
 			{description}
 		    </DialogContentText>
 		</DialogContent>
+		<FormControl className={classes.formControl}>
+		    $
+		    <Input
+			id="component-simple"
+			value={donationAmount}
+			onChange={(e) => setDonationAmount(e.target.value)}
+			placeholder="0.00"
+		    />
+		</FormControl>
 		<DialogActions>
+		    <Button onClick={submitFunds} variant="contained" color="primary">
+			Donate
+		    </Button>
 		    <Button onClick={handleClose} color="primary">
 			Cancel
 		    </Button>
@@ -157,7 +188,8 @@ const FundraiserCard = (props) => {
 			    {fundName}
 			</Typography>
 			<Typography variant="body2" color="textSecondary" component="p">
-			    {description}
+			    {description} <br/>
+			    Total Donations: {totalDonations}
 			</Typography>
 		    </CardContent>
 		</CardActionArea>
