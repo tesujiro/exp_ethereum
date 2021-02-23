@@ -13,12 +13,26 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import FilledInput from '@material-ui/core/FilledInput';
+import FormControl from '@material-ui/core/FormControl';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import Input from '@material-ui/core/Input';
+import InputLabel from '@material-ui/core/InputLabel';
+import OutlinedInput from '@material-ui/core/OutlinedInput';
 
 import FundraiserContract from "./contracts/Fundraiser.json";
 import Web3 from 'web3'
 //import getWeb3 from "./getWeb3";
 
 const useStyles = makeStyles(theme => ({
+    container: {
+	display: 'flex',
+	flexWrap: 'wrap',
+    },
+    formControl: {
+	margin: theme.spacing(1),
+	display: 'table-cell'
+    },
     card: {
 	maxWidth: 450,
 	height: 400
@@ -31,6 +45,14 @@ const useStyles = makeStyles(theme => ({
     },
     input: {
 	display: 'none',
+    },
+    paper: {
+	position: 'absolute',
+	width: 400,
+	backgroundColor: theme.palette.background.paper,
+	border: 'none',
+	boxShadow: 'none',
+	padding: 4,
     },
 }));
 
@@ -111,9 +133,9 @@ const FundraiserCard = (props) => {
 	    <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
 		<DialogTitle id="form-dialog-title">Donate to {fundName}</DialogTitle>
 		<DialogContent>
+		    <img src={imageURL} width='200px' height='200px' />
 		    <DialogContentText>
-			<img src={imageURL} width='200px' height='200px' />
-			<p>{description}</p>
+			{description}
 		    </DialogContentText>
 		</DialogContent>
 		<DialogActions>
@@ -126,16 +148,16 @@ const FundraiserCard = (props) => {
 	    <Card className={classes.card} onClick={handleOpen}>
 		<CardActionArea>
 		    <CardMedia
-		    className={classes.media}
-		    image={imageURL}
-		    title="Fundraiser Image"
-		    />
+			title="Fundraiser Image"
+		    >
+		    <img src={imageURL} className={classes.media}/>
+		    </CardMedia>
 		    <CardContent>
 			<Typography gutterBottom variant="h5" component="h2">
 			    {fundName}
 			</Typography>
 			<Typography variant="body2" color="textSecondary" component="p">
-			    <p>{description}</p>
+			    {description}
 			</Typography>
 		    </CardContent>
 		</CardActionArea>

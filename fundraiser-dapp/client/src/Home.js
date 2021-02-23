@@ -22,7 +22,7 @@ const Home = () => {
 	    	//console.log("fundraiser.name: "+fundraiser.name);
 	    	//console.log("fundraiser.imageURL: "+fundraiser.imageURL);
 		return (
-		    <FundraiserCard fundraiser={fundraiser} />
+		    <FundraiserCard fundraiser={fundraiser} key={fundraiser}/>
 		)
 	    })
 	}
