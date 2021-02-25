@@ -95,9 +95,7 @@ const FundraiserCard = (props) => {
 	const fundraisercontract = contract
 	const ethRate = exchangeRate
 	const ethTotal = donationAmount / ethRate
-	console.log("ethTotal:",ethTotal);
 	const donation = web3.utils.toWei(ethTotal.toString())  // donation in Wei
-	console.log("donation in Wei:",donation);
 
 	await contract.methods.donate().send({
 	    from: accounts[0],
@@ -124,13 +122,8 @@ const FundraiserCard = (props) => {
 	console.log("FundraiserCard.init()");
 	//const web3 = await getWeb3();
 	try {
-	    // Here ??
-	    //const apiKey = process.env.REACT_APP_CRYPTOCOMPARE_API_KEY;
-	    //console.log("API-KEY=",apiKey);
-	    cc.setApiKey(apiKey);
-
+	    //cc.setApiKey(apiKey);
 	    console.log("fundraiser:",fundraiser);
-	    //const fund = fundraiser
 	    const networkId = await web3.eth.net.getId();
 	    const deployedNetwork = FundraiserContract.networks[networkId];
 	    const accounts = await web3.eth.getAccounts();
@@ -145,9 +138,14 @@ const FundraiserCard = (props) => {
 	    const name = await instance.methods.name().call()
 	    const description = await instance.methods.description().call()
 	    const totalDonations = await instance.methods.totalDonations().call()
-	    console.log("totalDonations:",totalDonations);
 	    const imageURL = await instance.methods.imageURL().call()
 	    const url = await instance.methods.url().call()
+
+	    setFundname(name)
+	    setDescription(description)
+	    setImageURL(imageURL)
+	    console.log("imageURL:",imageURL);
+	    setURL(url)
 
 	    // calculate the exchange rate here
 	    const exchangeRate = await cc.price('ETH', ['USD']);
@@ -156,14 +154,6 @@ const FundraiserCard = (props) => {
 	    const eth = web3.utils.fromWei(totalDonations, 'ether')
 	    const dollarDonationAmount = exchangeRate.USD * eth
 	    console.log("dollarDonationAmount:",dollarDonationAmount);
-
-	    setFundname(name)
-	    setDescription(description)
-	    setImageURL(imageURL)
-	    console.log("imageURL:",imageURL);
-	    //setTotalDonations(totalDonations)
-	    setURL(url)
-
 	    setTotalDonations(dollarDonationAmount)
 
 	}
