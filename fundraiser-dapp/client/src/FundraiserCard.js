@@ -95,7 +95,9 @@ const FundraiserCard = (props) => {
 	const fundraisercontract = contract
 	const ethRate = exchangeRate
 	const ethTotal = donationAmount / ethRate
-	const donation = web3.utils.toWei(ethTotal.toString())
+	console.log("ethTotal:",ethTotal);
+	const donation = web3.utils.toWei(ethTotal.toString())  // donation in Wei
+	console.log("donation in Wei:",donation);
 
 	await contract.methods.donate().send({
 	    from: accounts[0],
@@ -105,14 +107,9 @@ const FundraiserCard = (props) => {
 	setOpen(false);
 
 	const totalDonations = await contract.methods.totalDonations().call()
-	setTotalDonations(totalDonations)
-	/*
-	const exchangeRate = await cc.price('ETH', ['USD']);
-	setExchangeRate(exchangeRate.USD);
 	const eth = web3.utils.fromWei(totalDonations, 'ether')
-	const dollarDonationAmount = exchangeRate.USD * eth
+	const dollarDonationAmount = exchangeRate * eth
 	setTotalDonations(dollarDonationAmount)
-	*/
     }
 
     useEffect(() => {
@@ -148,6 +145,7 @@ const FundraiserCard = (props) => {
 	    const name = await instance.methods.name().call()
 	    const description = await instance.methods.description().call()
 	    const totalDonations = await instance.methods.totalDonations().call()
+	    console.log("totalDonations:",totalDonations);
 	    const imageURL = await instance.methods.imageURL().call()
 	    const url = await instance.methods.url().call()
 
@@ -189,6 +187,7 @@ const FundraiserCard = (props) => {
 			{description}
 		    </DialogContentText>
 		</DialogContent>
+		<div className="donation-input-container">
 		<FormControl className={classes.formControl}>
 		    $
 		    <Input
@@ -198,7 +197,8 @@ const FundraiserCard = (props) => {
 			placeholder="0.00"
 		    />
 		</FormControl>
-		<p>Eth Amount: {ethAmount}</p>
+		<p>Eth: {ethAmount}</p>
+		</div>
 		<DialogActions>
 		    <Button onClick={submitFunds} variant="contained" color="primary">
 			Donate
