@@ -91,23 +91,32 @@ const FundraiserCard = (props) => {
     };
 
     const submitFunds = async () => {
-	console.log("submitFunds() : donationAmount $",donationAmount);
-	const fundraisercontract = contract
-	const ethRate = exchangeRate
-	const ethTotal = donationAmount / ethRate
-	const donation = web3.utils.toWei(ethTotal.toString())  // donation in Wei
+	try{
+	    console.log("submitFunds() : donationAmount $",donationAmount);
+	    const fundraisercontract = contract
+	    const ethRate = exchangeRate
+	    const ethTotal = donationAmount / ethRate
+	    console.log("ethTotal:",ethTotal);
+	    const donation = web3.utils.toWei(ethTotal.toString(),'ether')  // donation in Wei
 
-	await contract.methods.donate().send({
-	    from: accounts[0],
-	    value: donation,
-	    gas: 650000
-	})
-	setOpen(false);
+	    await contract.methods.donate().send({
+		from: accounts[0],
+		value: donation,
+		gas: 650000
+	    })
+	    setOpen(false);
 
-	const totalDonations = await contract.methods.totalDonations().call()
-	const eth = web3.utils.fromWei(totalDonations, 'ether')
-	const dollarDonationAmount = exchangeRate * eth
-	setTotalDonations(dollarDonationAmount)
+	    const totalDonations = await contract.methods.totalDonations().call()
+	    const eth = web3.utils.fromWei(totalDonations, 'ether')
+	    const dollarDonationAmount = exchangeRate * eth
+	    setTotalDonations(dollarDonationAmount)
+	}
+	catch(error) {
+	    console.error(error);
+	    alert(
+		error
+	    );
+	}
     }
 
     useEffect(() => {
