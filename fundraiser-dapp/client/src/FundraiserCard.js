@@ -78,6 +78,7 @@ const FundraiserCard = (props) => {
     const [ donationAmount, setDonationAmount ] = useState(null);
     const [ exchangeRate, setExchangeRate ] = useState(null);
     const ethAmount = donationAmount / exchangeRate || 0;
+    const [ userDonations, setUserDonations ] = useState(null);
 
     const handleOpen = () => {
 	setDonationAmount(0);
@@ -165,6 +166,10 @@ const FundraiserCard = (props) => {
 	    console.log("dollarDonationAmount:",dollarDonationAmount);
 	    setTotalDonations(dollarDonationAmount)
 
+	    const userDonations = await instance.methods.myDonations().call({ from: accounts[0]})
+	    console.log(userDonations)
+	    setUserDonations(userDonations)
+
 	}
 	catch(error) {
 	    console.error(error);
@@ -172,6 +177,36 @@ const FundraiserCard = (props) => {
 		`Failed to load web3, accounts, or contract. Check console for details.`,
 	    );
 	}
+    }
+
+    const renderDonationsList = () => {
+	var donations = userDonations
+	if (donations === null) {return null}
+	// we'll return null so we don't get an error when the
+	// donations aren't in the state yet
+
+	const totalDonations = donations.values.length
+	console.log("totalDonations=",totalDonations);
+	let donationList = []
+	var i
+	for (i = 0; i < totalDonations; i++) {
+	    if (donations.values[i]==0) break;
+	    const ethAmount = web3.utils.fromWei(donations.values[i])
+	    const userDonation = exchangeRate * ethAmount
+	    const donationDate = donations.dates[i]
+	    donationList.push({ donationAmount: userDonation.toFixed(2),
+		date: donationDate})
+	}
+	return donationList.map((donation) => {
+	    return (
+		<div className="donation-list">
+		<p>${donation.donationAmount}</p>
+		<Button variant="contained" color="primary">
+		Request Receipt
+		</Button>
+		</div>
+	    )
+	})
     }
 
 	//This is FundraiserCard = {props.fundraiser} <br/>
@@ -197,6 +232,10 @@ const FundraiserCard = (props) => {
 		    />
 		</FormControl>
 		<p>Eth: {ethAmount}</p>
+		</div>
+		<div>
+		    <h3>My donations</h3>
+		    {renderDonationsList()}
 		</div>
 		<DialogActions>
 		    <Button onClick={submitFunds} variant="contained" color="primary">
