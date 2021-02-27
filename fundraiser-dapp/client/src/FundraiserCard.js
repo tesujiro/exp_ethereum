@@ -134,8 +134,8 @@ const FundraiserCard = (props) => {
 	try {
 	    //cc.setApiKey(apiKey);
 	    console.log("fundraiser:",fundraiser);
-	    const networkId = await web3.eth.net.getId();
-	    const deployedNetwork = FundraiserContract.networks[networkId];
+	    //const networkId = await web3.eth.net.getId();
+	    //const deployedNetwork = FundraiserContract.networks[networkId];
 	    const accounts = await web3.eth.getAccounts();
 	    const instance = await new web3.eth.Contract(
 		FundraiserContract.abi,
@@ -197,9 +197,9 @@ const FundraiserCard = (props) => {
 	    donationList.push({ donationAmount: userDonation.toFixed(2),
 		date: donationDate})
 	}
-	return donationList.map((donation) => {
+	return donationList.map((donation,index) => {
 	    return (
-		<div className="donation-list" >
+		<div className="donation-list" key={index} >
 		<p>${donation.donationAmount}</p>
 		<Button variant="contained" color="primary">
 		    <Link

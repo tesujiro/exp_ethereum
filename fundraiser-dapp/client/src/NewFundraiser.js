@@ -60,7 +60,6 @@ const NewFundraiser = () => {
 		//instance.methods.map(method => console.log(method));
 		//console.log("typeof instance: "+(typeof instance));
 		setContract(instance)
-		console.log("contract: "+contract);
 		setAccounts(accounts)
 
 	    } catch(error) {
