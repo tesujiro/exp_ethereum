@@ -8,9 +8,8 @@ const Receipts = (props) => {
 
     useEffect(() => {
 	const { donation, date, fund } = props.location.state
-	console.log("fundName:",fund);
 
-	const formattedDate = new Date(parseInt(date))
+	const formattedDate = new Date(date * 1000)
 
 	setDonation(donation)
 	setDate(formattedDate.toString())
