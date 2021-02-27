@@ -190,7 +190,8 @@ const FundraiserCard = (props) => {
 	let donationList = []
 	var i
 	for (i = 0; i < totalDonations; i++) {
-	    if (donations.values[i]===0) break;
+	    if (donations.values[i]==="0") break;
+
 	    const ethAmount = web3.utils.fromWei(donations.values[i])
 	    const userDonation = exchangeRate * ethAmount
 	    const donationDate = donations.dates[i]
