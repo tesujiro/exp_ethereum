@@ -13,12 +13,13 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import FilledInput from '@material-ui/core/FilledInput';
+//import FilledInput from '@material-ui/core/FilledInput';
 import FormControl from '@material-ui/core/FormControl';
-import FormHelperText from '@material-ui/core/FormHelperText';
+//import FormHelperText from '@material-ui/core/FormHelperText';
 import Input from '@material-ui/core/Input';
-import InputLabel from '@material-ui/core/InputLabel';
-import OutlinedInput from '@material-ui/core/OutlinedInput';
+//import InputLabel from '@material-ui/core/InputLabel';
+//import OutlinedInput from '@material-ui/core/OutlinedInput';
+import { Link } from 'react-router-dom';
 
 import FundraiserContract from "./contracts/Fundraiser.json";
 import Web3 from 'web3'
@@ -71,7 +72,7 @@ const FundraiserCard = (props) => {
     const [ fundName, setFundname ] = useState(null)
     const [ description, setDescription ] = useState(null)
     const [ totalDonations, setTotalDonations ] = useState(null)
-    const [ donationCount, setDonationCount ] = useState(null)
+    //const [ donationCount, setDonationCount ] = useState(null)
     const [ imageURL, setImageURL ] = useState(null)
     const [ url, setURL ] = useState(null)
     const [ open, setOpen ] = React.useState(false);
@@ -94,7 +95,6 @@ const FundraiserCard = (props) => {
     const submitFunds = async () => {
 	try{
 	    console.log("submitFunds() : donationAmount $",donationAmount);
-	    const fundraisercontract = contract
 	    const ethRate = exchangeRate
 	    const ethTotal = donationAmount / ethRate
 	    console.log("ethTotal:",ethTotal);
@@ -190,7 +190,7 @@ const FundraiserCard = (props) => {
 	let donationList = []
 	var i
 	for (i = 0; i < totalDonations; i++) {
-	    if (donations.values[i]==0) break;
+	    if (donations.values[i]===0) break;
 	    const ethAmount = web3.utils.fromWei(donations.values[i])
 	    const userDonation = exchangeRate * ethAmount
 	    const donationDate = donations.dates[i]
@@ -199,10 +199,16 @@ const FundraiserCard = (props) => {
 	}
 	return donationList.map((donation) => {
 	    return (
-		<div className="donation-list">
+		<div className="donation-list" >
 		<p>${donation.donationAmount}</p>
 		<Button variant="contained" color="primary">
-		Request Receipt
+		    <Link
+		    className="donation-receipt-link"
+		    to={{ pathname: '/receipts',
+			    state: { donation: donation.donationAmount, date: donation.date, fund: fundName}
+		    }}>
+		    Request Receipt
+		    </Link>
 		</Button>
 		</div>
 	    )
@@ -216,7 +222,7 @@ const FundraiserCard = (props) => {
 	    <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
 		<DialogTitle id="form-dialog-title">Donate to {fundName}</DialogTitle>
 		<DialogContent>
-		    <img src={imageURL} width='200px' height='200px' />
+		    <img src={imageURL} alt={fundName} width='200px' height='200px' />
 		    <DialogContentText>
 			{description}
 		    </DialogContentText>
@@ -252,7 +258,7 @@ const FundraiserCard = (props) => {
 		    <CardMedia
 			title="Fundraiser Image"
 		    >
-		    <img src={imageURL} className={classes.media}/>
+		    <img src={imageURL} alt={fundName} className={classes.media}/>
 		    </CardMedia>
 		    <CardContent>
 			<Typography gutterBottom variant="h5" component="h2">

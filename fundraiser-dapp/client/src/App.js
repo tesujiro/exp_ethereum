@@ -6,7 +6,8 @@ import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
 
 import NewFundraiser from './NewFundraiser';
 import Home from './Home';
-import FundraiserCard from './FundraiserCard'
+//import FundraiserCard from './FundraiserCard';
+import Receipts from './Receipts';
 
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -16,7 +17,7 @@ import Typography from '@material-ui/core/Typography';
 const App = () => {
     const [state, setState] =
 	useState({web3: null, accounts: null, contract: null});
-    const [storageValue, setStorageValue] = useState(0);
+    //const [storageValue, setStorageValue] = useState(0);
 
     useEffect(() => {
 	const init = async() => {
@@ -41,6 +42,7 @@ const App = () => {
 	init();
     }, []);
 
+    /*
     const useStyles = makeStyles({
 	root: {
 	    flexGrow: 1,
@@ -53,6 +55,7 @@ const App = () => {
 	const { accounts, contract } = state;
 
     };
+    */
 
     return(
 	<Router>
@@ -69,6 +72,7 @@ const App = () => {
 
 	    <Route path="/" exact component={Home} />
 	    <Route path="/new/" component={NewFundraiser} />
+	    <Route path="/receipts" component={Receipts} />
 	  </div>
 	</Router>
     );
