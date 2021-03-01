@@ -13,6 +13,7 @@ const Home = () => {
     }, []);
 
     const displayFundraisers = () => {
+	console.log("Home#displayFundraisers()");
 	if (funds) {  // TODO ???
 	    console.log("funds.length: "+funds.length);
 	    console.log("funds: "+funds);
@@ -29,8 +30,11 @@ const Home = () => {
     }
 
     const init = async () => {
+	console.log("Home#init()");
 	try {
+	    console.log("Home#init() path1");
 	    const web3 = await getWeb3();
+	    console.log("Home#init() path1.1");
 	    const networkId = await web3.eth.net.getId();
 	    const deployedNetwork = FactoryContract.networks[networkId];
 	    const accounts = await web3.eth.getAccounts();
@@ -38,8 +42,10 @@ const Home = () => {
 		FactoryContract.abi,
 		deployedNetwork && deployedNetwork.address,
 	    );
+	    console.log("Home#init() path3");
 	    setContract(instance)
 	    setAccounts(accounts)
+	    console.log("Home#init() path4");
 
 	    const funds = await instance.methods.fundraisers(10, 0).call()
 	    console.log("funds: "+funds)
