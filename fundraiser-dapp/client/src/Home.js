@@ -12,13 +12,18 @@ const Home = () => {
 	init();
     }, []);
 
+    window.ethereum.on('accountsChanged', function (accounts) {
+	console.log("accountsChanged in Home");
+	//window.location.reload()
+    })
+
     const displayFundraisers = () => {
 	console.log("Home#displayFundraisers()");
 	if (funds) {  // TODO ???
-	    console.log("funds.length: "+funds.length);
-	    console.log("funds: "+funds);
+	    //console.log("funds.length: "+funds.length);
+	    //console.log("funds: "+funds);
 	    return funds.map((fundraiser) => {
-	    	console.log("fundraiser: "+fundraiser);
+	    	//console.log("fundraiser: "+fundraiser);
 	    	//console.log("fundraiser: "+JSON.stringify(fundraiser));
 	    	//console.log("fundraiser.name: "+fundraiser.name);
 	    	//console.log("fundraiser.imageURL: "+fundraiser.imageURL);
@@ -32,23 +37,24 @@ const Home = () => {
     const init = async () => {
 	console.log("Home#init()");
 	try {
-	    console.log("Home#init() path1");
+	    //console.log("Home#init() path1");
 	    const web3 = await getWeb3();
-	    console.log("Home#init() path1.1");
+	    //console.log("Home#init() path1.1");
 	    const networkId = await web3.eth.net.getId();
 	    const deployedNetwork = FactoryContract.networks[networkId];
 	    const accounts = await web3.eth.getAccounts();
+	    console.log("Home#accounts: ",accounts);
 	    const instance = new web3.eth.Contract(
 		FactoryContract.abi,
 		deployedNetwork && deployedNetwork.address,
 	    );
-	    console.log("Home#init() path3");
+	    //console.log("Home#init() path3");
 	    setContract(instance)
 	    setAccounts(accounts)
-	    console.log("Home#init() path4");
+	    //console.log("Home#init() path4");
 
 	    const funds = await instance.methods.fundraisers(10, 0).call()
-	    console.log("funds: "+funds)
+	    //console.log("funds: "+funds)
 	    setFunds(funds)
 	}
 	catch(error) {

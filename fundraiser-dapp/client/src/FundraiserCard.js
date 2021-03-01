@@ -27,7 +27,7 @@ import Web3 from 'web3'
 
 const cc = require('cryptocompare');
 const apiKey = process.env.REACT_APP_CRYPTOCOMPARE_API_KEY;
-console.log("API-KEY=",apiKey);
+//console.log("API-KEY=",apiKey);
 cc.setApiKey(apiKey);
 
 const useStyles = makeStyles(theme => ({
@@ -64,11 +64,12 @@ const useStyles = makeStyles(theme => ({
 
 const FundraiserCard = (props) => {
     const classes = useStyles();
-    const web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'))
-    //const web3 = await getWeb3();
+    //const web3 = new Web3(new Web3.providers.HttpProvider('http://127.0.0.1:8545'))
+    const web3 = new Web3(window.web3.currentProvider);
 
     const [ contract, setContract] = useState(null)
     const [ accounts, setAccounts ] = useState(null)
+    const [ isOwner, setIsOwner ] = useState(false)
     const [ fundName, setFundname ] = useState(null)
     const [ description, setDescription ] = useState(null)
     const [ totalDonations, setTotalDonations ] = useState(null)
@@ -94,10 +95,12 @@ const FundraiserCard = (props) => {
 
     const submitFunds = async () => {
 	try{
-	    console.log("submitFunds() : donationAmount $",donationAmount);
+	    //const web3 = await getWeb3();
+
+	    //console.log("submitFunds() : donationAmount $",donationAmount);
 	    const ethRate = exchangeRate
 	    const ethTotal = donationAmount / ethRate
-	    console.log("ethTotal:",ethTotal);
+	    //console.log("ethTotal:",ethTotal);
 	    const donation = web3.utils.toWei(ethTotal.toString(),'ether')  // donation in Wei
 
 	    await contract.methods.donate().send({
@@ -120,6 +123,14 @@ const FundraiserCard = (props) => {
 	}
     }
 
+    const withdrawalFunds = async () => {
+	await contract.methods.withdraw().send({
+	    from: accounts[0],
+	})
+
+	alert('Funds Withdrawn!')
+    }
+
     useEffect(() => {
 	// we'll add in the Web3 call here
 	console.log("FundraiserCard.useEffect()");
@@ -128,15 +139,21 @@ const FundraiserCard = (props) => {
 	}
     }, [props.fundraiser]);
 
+    window.ethereum.on('accountsChanged', function (accounts) {
+	//console.log("accountsChanged in FundraiserCard");
+	//window.location.reload()
+    })
+
     const init = async (fundraiser) => {
 	console.log("FundraiserCard.init()");
 	//const web3 = await getWeb3();
 	try {
 	    //cc.setApiKey(apiKey);
-	    console.log("fundraiser:",fundraiser);
+	    //console.log("fundraiser:",fundraiser);
 	    //const networkId = await web3.eth.net.getId();
 	    //const deployedNetwork = FundraiserContract.networks[networkId];
 	    const accounts = await web3.eth.getAccounts();
+	    console.log("FundraiserCard#accounts: ",accounts);
 	    const instance = await new web3.eth.Contract(
 		FundraiserContract.abi,
 		fundraiser
@@ -145,6 +162,19 @@ const FundraiserCard = (props) => {
 	    setContract(instance)
 	    setAccounts(accounts)
 
+	    // Check if the current account owns the contract,
+	    const currentUser = accounts[0]
+	    const isOwner = await instance.methods.owner().call()
+	    //console.log("currentUser:",currentUser);
+	    //console.log("isOwner:",isOwner);
+	    if (isOwner === currentUser) {
+		setIsOwner(true)
+		//console.log("setIsOwner(true)");
+	    } else {
+		setIsOwner(false)
+		//console.log("setIsOwner(false)");
+	    }
+	    
 	    const name = await instance.methods.name().call()
 	    const description = await instance.methods.description().call()
 	    const totalDonations = await instance.methods.totalDonations().call()
@@ -154,7 +184,7 @@ const FundraiserCard = (props) => {
 	    setFundname(name)
 	    setDescription(description)
 	    setImageURL(imageURL)
-	    console.log("imageURL:",imageURL);
+	    //console.log("imageURL:",imageURL);
 	    setURL(url)
 
 	    // calculate the exchange rate here
@@ -163,11 +193,11 @@ const FundraiserCard = (props) => {
 	    // pass in the coin you want to check and the currency
 	    const eth = web3.utils.fromWei(totalDonations, 'ether')
 	    const dollarDonationAmount = exchangeRate.USD * eth
-	    console.log("dollarDonationAmount:",dollarDonationAmount);
+	    //console.log("dollarDonationAmount:",dollarDonationAmount);
 	    setTotalDonations(dollarDonationAmount)
 
 	    const userDonations = await instance.methods.myDonations().call({ from: accounts[0]})
-	    console.log(userDonations)
+	    //console.log(userDonations)
 	    setUserDonations(userDonations)
 
 	}
@@ -186,12 +216,13 @@ const FundraiserCard = (props) => {
 	// donations aren't in the state yet
 
 	const totalDonations = donations.values.length
-	console.log("totalDonations=",totalDonations);
+	//console.log("totalDonations=",totalDonations);
 	let donationList = []
 	var i
 	for (i = 0; i < totalDonations; i++) {
 	    if (donations.values[i]==="0") break;
 
+	    //const web3 = getWeb3();
 	    const ethAmount = web3.utils.fromWei(donations.values[i])
 	    const userDonation = exchangeRate * ethAmount
 	    const donationDate = donations.dates[i]
@@ -251,6 +282,21 @@ const FundraiserCard = (props) => {
 		    <Button onClick={handleClose} color="primary">
 			Cancel
 		    </Button>
+		</DialogActions>
+		<DialogActions>
+		    <Button onClick={handleClose} color="primary">
+		    Cancel
+		    </Button>
+
+		    {isOwner &&
+			<Button
+			variant="contained"
+			color="primary"
+			onClick={withdrawalFunds}
+			>
+			Withdrawal
+			</Button>
+		    }
 		</DialogActions>
 	    </Dialog>
 
