@@ -66,6 +66,7 @@ const FundraiserCard = (props) => {
     const classes = useStyles();
     //const web3 = new Web3(new Web3.providers.HttpProvider('http://127.0.0.1:8545'))
     const web3 = new Web3(window.web3.currentProvider);
+    //const web3 = getWeb3();
 
     const [ contract, setContract] = useState(null)
     const [ accounts, setAccounts ] = useState(null)
@@ -81,6 +82,7 @@ const FundraiserCard = (props) => {
     const [ exchangeRate, setExchangeRate ] = useState(null);
     const ethAmount = donationAmount / exchangeRate || 0;
     const [ userDonations, setUserDonations ] = useState(null);
+    const [ beneficiary, setNewBeneficiary ] = useState(false);
 
     const handleOpen = () => {
 	setDonationAmount(0);
@@ -95,8 +97,6 @@ const FundraiserCard = (props) => {
 
     const submitFunds = async () => {
 	try{
-	    //const web3 = await getWeb3();
-
 	    //console.log("submitFunds() : donationAmount $",donationAmount);
 	    const ethRate = exchangeRate
 	    const ethTotal = donationAmount / ethRate
@@ -131,6 +131,15 @@ const FundraiserCard = (props) => {
 	alert('Funds Withdrawn!')
     }
 
+    const setBeneficiary = async () => {
+	console.log("setBeneficiary :",beneficiary);
+	await contract.methods.setBeneficiary(beneficiary).send({
+	    from: accounts[0],
+	})
+
+	alert(`Fundraiser Beneficiary Changed`)
+    }
+
     useEffect(() => {
 	// we'll add in the Web3 call here
 	console.log("FundraiserCard.useEffect()");
@@ -146,7 +155,6 @@ const FundraiserCard = (props) => {
 
     const init = async (fundraiser) => {
 	console.log("FundraiserCard.init()");
-	//const web3 = await getWeb3();
 	try {
 	    //cc.setApiKey(apiKey);
 	    //console.log("fundraiser:",fundraiser);
@@ -222,7 +230,6 @@ const FundraiserCard = (props) => {
 	for (i = 0; i < totalDonations; i++) {
 	    if (donations.values[i]==="0") break;
 
-	    //const web3 = getWeb3();
 	    const ethAmount = web3.utils.fromWei(donations.values[i])
 	    const userDonation = exchangeRate * ethAmount
 	    const donationDate = donations.dates[i]
@@ -287,15 +294,22 @@ const FundraiserCard = (props) => {
 		    <Button onClick={handleClose} color="primary">
 		    Cancel
 		    </Button>
-
 		    {isOwner &&
-			<Button
-			variant="contained"
-			color="primary"
-			onClick={withdrawalFunds}
-			>
-			Withdrawal
-			</Button>
+			<div>
+			    <FormControl className={classes.formControl}>
+				Beneficiary:
+				<Input
+				value={beneficiary}
+				onChange={(e) => setNewBeneficiary(e.target.value)}
+				placeholder="Set Beneficiary"
+				/>
+			    </FormControl>
+
+			    <Button variant="contained" style={{ marginTop: 20 }} color="primary"
+			    onClick={setBeneficiary}>
+				Set Beneficiary
+			    </Button>
+			</div>
 		    }
 		</DialogActions>
 	    </Dialog>
