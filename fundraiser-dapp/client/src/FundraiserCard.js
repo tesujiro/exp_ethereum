@@ -82,7 +82,7 @@ const FundraiserCard = (props) => {
     const [ exchangeRate, setExchangeRate ] = useState(null);
     const ethAmount = donationAmount / exchangeRate || 0;
     const [ userDonations, setUserDonations ] = useState(null);
-    const [ beneficiary, setNewBeneficiary ] = useState(false);
+    const [ beneficiary, setNewBeneficiary ] = useState("");
 
     const handleOpen = () => {
 	setDonationAmount(0);

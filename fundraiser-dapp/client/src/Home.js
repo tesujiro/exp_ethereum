@@ -14,7 +14,7 @@ const Home = () => {
 
     window.ethereum.on('accountsChanged', function (accounts) {
 	console.log("accountsChanged in Home");
-	//window.location.reload()
+	window.location.reload()
     })
 
     const displayFundraisers = () => {
