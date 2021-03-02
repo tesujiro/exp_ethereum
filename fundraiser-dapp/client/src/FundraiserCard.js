@@ -291,9 +291,6 @@ const FundraiserCard = (props) => {
 		    </Button>
 		</DialogActions>
 		<DialogActions>
-		    <Button onClick={handleClose} color="primary">
-		    Cancel
-		    </Button>
 		    {isOwner &&
 			<div>
 			    <FormControl className={classes.formControl}>
@@ -304,11 +301,20 @@ const FundraiserCard = (props) => {
 				placeholder="Set Beneficiary"
 				/>
 			    </FormControl>
-
-			    <Button variant="contained" style={{ marginTop: 20 }} color="primary"
+			    <Button variant="contained" style={{ marginTop: 0 }} color="primary"
 			    onClick={setBeneficiary}>
 				Set Beneficiary
 			    </Button>
+			    <Button
+			    variant="contained"
+			    color="primary"
+			    onClick={withdrawalFunds}
+			    >
+				Withdrawal
+			    </Button>
+		    <Button onClick={handleClose} color="primary">
+		    Cancel
+		    </Button>
 			</div>
 		    }
 		</DialogActions>
